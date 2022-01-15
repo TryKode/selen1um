@@ -11,6 +11,7 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
+import chromedriver_autoinstaller
 
 # 2. Create Class for taking Data in
 class database_scrape(BaseModel):
@@ -28,6 +29,8 @@ def index():
 @app.get('/scrape')
 def scrape_data(database_scrape:database_scrape):
     productURL = database_scrape.product_url
+    
+    chromedriver_autoinstaller.install()
     driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get(productURL)
 
